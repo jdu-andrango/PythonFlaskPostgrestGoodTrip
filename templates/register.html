@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+
+    <link rel="stylesheet" href="/static/css/register.css">
+</head>
+
+<body>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check" viewBox="0 0 16 16">
+            <title>Check</title>
+            <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+        </symbol>
+    </svg>
+
+    <div class="container py-3">
+        <header>
+            <div>
+                <h3 class="float-md-start mb-0">GoodTrip</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="/">Home</a>
+                    <a class="nav-link fw-bold py-1 px-0 active" href="/templates/register.html">Register</a>
+                    <a class="nav-link fw-bold py-1 px-0" href="/templates/login.html">sign in</a>
+                    <a class="nav-link fw-bold py-1 px-0" href="/templates/galery.html">Gallery</a>
+                    <a class="nav-link fw-bold py-1 px-0" href="/templates/sale.html">Sale</a>
+                </nav>
+            </div>
+            <br>
+            <br>
+            <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                <h1 class="display-4 fw-normal">Pricing</h1>
+                <p class="fs-5 text-muted">Quickly build an effective pricing table for your potential customers with
+                    this
+                    Bootstrap example. It’s built with default Bootstrap components and utilities with little
+                    customization.
+                </p>
+            </div>
+        </header>
+
+        <main>
+            <div class="container-lg text-center ">
+
+                <main class="form-signin w-100 m-auto">
+                    <div class="container">
+                        <div class="row">
+                            <h1>Registro</h1>
+
+                            <div class="col">
+                                <form id="formRegistro" action="valid" method="post>
+                    <div class=" mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" name="nombre" id="exampleInputEmail1"
+                                        placeholder="Ingrese su Nombre" aria-describedby="emailHelp">
+
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword2" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" name="apellido"
+                                    placeholder="Ingrese su Apellido" id="exampleInputPassword2">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword3" class="form-label">Email</label>
+                                <input type="text" class="form-control" name="email" placeholder="ingrese su sexo"
+                                    id="exampleInputPassword3">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword4" class="form-label">Clave</label>
+                                <input type="text" class="form-control" name="clave"
+                                    placeholder="Ingrese su nacionalidad" id="exampleInputPassword4">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword5" class="form-label">Sector</label>
+                                <input type="text" class="form-control" name="sector"
+                                    placeholder="Ingrese su observacion" id="exampleInputPassword5">
+                            </div class="buton">
+
+
+                            <button type="submit" class="btn btn-warning">Enviar</button>
+                            </form>
+
+                        </div>
+                        <div class="col">
+                            <ul id="usuarioList">
+
+                            </ul>
+
+                        </div>
+
+
+                    </div>
+            </div>
+
+        </main>
+
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+                <div class="col-12 col-md">
+                    <img class="mb-2" src="" alt="" width="24" height="19">
+                    <small class="d-block mb-3 text-muted">&copy; 2017–2022</small>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Features</h5>
+                    <ul class="list-unstyled text-small">
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Stuff for
+                                developers</a>
+                        </li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled text-small">
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another resource</a>
+                        </li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>About</h5>
+                    <ul class="list-unstyled text-small">
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
+                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+
+
+</body>
+
+
+
+
+</html>

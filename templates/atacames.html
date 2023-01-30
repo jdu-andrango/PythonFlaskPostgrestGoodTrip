@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+
+    <link rel="stylesheet" href="/static/css/atacames.css">
+</head>
+
+<body>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" class="text-center">
+        <symbol id="check" viewBox="0 0 16 16">
+            <title>Check</title>
+            <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+        </symbol>
+    </svg>
+
+    <div class="container py-3">
+        <header>
+            <div>
+                <h3 class="float-md-start mb-0">GoodTrip</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="">Index</a>
+                    <a class="nav-link fw-bold py-1 px-0" href="/templates/register.html">Register</a>
+                    <a class="nav-link fw-bold py-1 px-0" href="/templates/login.html">Sing in</a>
+                    <a class="nav-link fw-bold py-1 px-0" href="/templates/galery.html">Galery</a>
+                    <a class="nav-link fw-bold py-1 px-0" href="/templates/costa.html">Contact</a>
+                </nav>
+            </div>
+            <br>
+            <br>
+
+        </header>
+
+        <div class="container-lg text-center ">
+
+            <main class="py-3">
+                <div class="container-lg">
+                    <img src="/static/img/carruselPerro.jpg" class="img-fluid " alt="...">
+
+                </div>
+            </main>
+            <br>
+            <div class="tituloSeccion text-center">
+                <h1 class="display-3">Comentarios</h1>
+            </div>
+            <hr>
+
+            <div class="container-xl">
+                <div class="row">
+                    <h1>Cuentanos tu experiencia dejandonos un comentario</h1>
+                    <hr>
+                    <br>
+                    <div class="col">
+                        <form id="form">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" id="exampleInputEmail1"
+                                    placeholder="Ingrese su Nombre" aria-describedby="emailHelp">
+
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword2" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" name="apellido"
+                                    placeholder="Ingrese su Apellido" id="exampleInputPassword2">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword3" class="form-label">Sexo</label>
+                                <input type="text" class="form-control" name="sexo" placeholder="ingrese su sexo"
+                                    id="exampleInputPassword3">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword4" class="form-label">Nacionalidad</label>
+                                <input type="text" class="form-control" name="nacionalidad"
+                                    placeholder="Ingrese su nacionalidad" id="exampleInputPassword4">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword5" class="form-label">Observacion</label>
+                                <input type="text" class="form-control" name="observacion"
+                                    placeholder="Ingrese su observacion" id="exampleInputPassword5">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword5" class="form-label">Conclucion</label>
+                                <input type="text" class="form-control" name="conclucion"
+                                    placeholder="Ingrese su conclucion" id="exampleInputPassword5">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">guardar</button>
+                        </form>
+
+                    </div>
+                    <div class="col">
+                        <ul id="comentarioList">
+
+                        </ul>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+</body>
+
+
+
+
+</html>
