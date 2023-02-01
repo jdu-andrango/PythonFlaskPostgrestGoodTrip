@@ -158,6 +158,74 @@ def updateUsuario(id):
 
     return jsonify(usuarioActualizado)
 
+
+
+@app.get('/goodtrip/usuarios/<id_usuario>')
+def mostrarUsuario(id_usuario):
+    
+    
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+    
+    curSor.execute('SELECT * FROM usuario WHERE id_usuario = %s ', (id_usuario, ))
+    traerUsuario=curSor.fetchone()
+    
+    
+    if traerUsuario is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+    print (traerUsuario)
+    return jsonify(traerUsuario)
+
+@app.delete('/goodtrip/usuarios/<id_usuario>')
+def deleteUsuario(id_usuario):
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+   
+    curSor.execute('DELETE FROM usuario WHERE id_usuario = %s RETURNING *', (id_usuario, ))
+    usuarioEliminado=curSor.fetchone()
+    conexion.commit()
+    
+    curSor.close()
+    conexion.close()
+    
+    if usuarioEliminado is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+    return jsonify(usuarioEliminado)
+
+
+
+@app.put('/goodtrip/usuarios/<id_usuario>')
+def updateUser(id_usuario):
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+
+    newUser= request.get_json()
+    
+    nombre = newUser['nombre']
+    apellido = newUser['apellido']
+    email =newUser ['email']
+    clave = newUser['clave']
+    sector =newUser ['sector']
+    
+    curSor.execute('UPDATE usuario SET nombre= %s, apellido= %s, email= %s, clave= %s,sector= %s RETURNING *',(nombre, apellido, email, clave,sector))
+    userActualizado=curSor.fetchone()
+    
+    conexion.commit()
+    
+    curSor.close()
+    conexion.close()
+    
+    if userActualizado is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+
+    return jsonify(userActualizado)
+
+
 @app.route('/')
 def home():
     return render_template ('home.html')

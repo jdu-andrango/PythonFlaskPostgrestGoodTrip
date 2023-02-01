@@ -44,6 +44,8 @@ form.addEventListener('submit', async e => {
         const data = await response.json();
         console.log(data);
         comentarios.unshift(data);
+        renderComentario(comentarios)
+        form.reset()
     }
     else {
         const response = await fetch(`/goodtrip/comentario/${comentarioId}`, {
@@ -58,15 +60,14 @@ form.addEventListener('submit', async e => {
                 nacionalidad,
                 observacion,
                 conclucion,
-            }),
-
+            })
         })
 
         const updataUser = await response.json()
         comentarios = comentarios.map(comentario => comentario.id === updataUser.id ? updataUser : comentario)
         renderComentario(comentarios)
-
-
+        editar = false
+        comentarioId = null
     }
 
     renderComentario(comentarios);
@@ -116,7 +117,8 @@ function renderComentario(comentarios) {
             })
             const data = await response.json()
             console.log(data)
-
+            comentarios = comentarios.filter(comentario => comentario.id !== data.id)
+            renderComentario(comentarios)
         })
 
         const btnEdit = comentarioItem.querySelector('.btn-edit')
