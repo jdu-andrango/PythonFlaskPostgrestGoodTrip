@@ -9,7 +9,9 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
 
-    <link rel="stylesheet" href="/static/css/login.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
 </head>
 
 <body>
@@ -29,7 +31,7 @@
                 <nav class="nav nav-masthead justify-content-center float-md-end">
                     <a class="nav-link fw-bold py-1 px-0 " href="/">Home</a>
                     <a class="nav-link fw-bold py-1 px-0 " href="/templates/register.html">Register</a>
-                    <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="/templates/login.html">sign
+                    <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="{{ url_for('login') }}">sign
                         in</a>
                     <a class="nav-link fw-bold py-1 px-0" href="/templates/galery.html">Gallery</a>
                     <a class="nav-link fw-bold py-1 px-0" href="/templates/sale.html">Sale</a>
@@ -40,39 +42,75 @@
 
         </header>
 
-        <div class="container-lg text-center ">
 
+<<<<<<< HEAD
             <main class="form-signin w-100 m-auto">
                 <form class="formLogin">
                     <img class="mb-4" src="" alt="" width="72" height="57">
                     <h1 class="h3 mb-3 fw-normal">LOG IN</h1>
+=======
+>>>>>>> 0a083d2406b1119dbcdfe1571cfe8e1b070ae409
 
-                    <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">Email address</label>
+        <main class="form-signin  w-100 m-auto ">
+
+            <div class="container-lg ">
+                <h3 class=" text-center  fw-normal">REGISTRATE</h3>
+
+                <form method="POST" action="">
+                    <div class="input-group form-group mb-4">
+                        <div class="input-group-prepend">
+                            {{ form.hidden_tag() }}
+                        </div>
+
                     </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label for="floatingPassword">Password</label>
+                    <br>
+                    <div class="input-group-prepend">
+
                     </div>
 
-                    <div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" value="remember-me"> Remember me
-                        </label>
+                    <div class="input-group form-group mb-4">
+                        <label class="floating mb-3 col-12" for="email">Email</label>
+                        {{ form.email }}
                     </div>
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-                    <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+                    <div class="input-group form-group mb-4">
+                        <div class="input-group-prepend">
+                            <label class="floating mb-3 col-12" for="email">Email</label>
+                            {{ form.clave }}
+                        </div>
+
+                    </div>
+
+                    <!-- <div>
+                                            <label class="blanco" for="sesionIniciadaHTML">Mantener la sesión iniciada</label>
+                                            <input type="checkbox" id="sesionIniciadaHTML" />
+                                        </div> -->
+                    <div class="form-group">
+                        <center>
+                            <br>
+                            <a href="{{ url_for('register')}}"><button type="button" class="btn btn-primary">Crear
+                                    Cuenta</button></a>
+                    </div>
+                    <div class="form-group">
+                        <center>
+                            <br>
+                            {{ form.submit }}
+                    </div>
+
+
+                    </center>
+
                 </form>
-            </main>
+            </div>
 
 
 
-        </div>
+        </main>
 
 
 
-    </div>
+
+
+
 
 
 

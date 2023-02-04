@@ -1,8 +1,22 @@
-from flask import Flask, jsonify, send_file,render_template, request,url_for,redirect
+from flask import Flask, jsonify, send_file,render_template, request,url_for,redirect,session
 from psycopg2 import connect,extras
+from wtforms import StringField, PasswordField, SubmitField
+from flask_wtf import FlaskForm
+from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import InputRequired, Length, ValidationError
+import hashlib
+import os
+
+
+
+
 
 app= Flask(__name__)
+app.static_folder = 'static'
 
+SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = SECRET_KEY
 
 
 host = 'localhost'
@@ -226,6 +240,45 @@ def updateUser(id_usuario):
     return jsonify(userActualizado)
 
 
+
+@app.route('/dashboard')
+def dashboard():
+    # Verificación de variable de sesión
+    if 'id_usuario' not in session:
+        return redirect(url_for('login'))
+
+    return render_template('dashboard.html')
+
+class LoginForm(FlaskForm):
+    email = StringField(validators=[
+            InputRequired(), Length(min=4, max=222)], render_kw={"placeholder": "email"})
+
+    clave = PasswordField(validators=[
+            InputRequired(), Length(min=8, max=222)], render_kw={"placeholder": "clave"})
+
+    submit = SubmitField('Login')
+
+
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    conn = getConexion()
+    cur = conn.cursor(cursor_factory=extras.RealDictCursor)
+    form = LoginForm()
+    if form.validate_on_submit():
+        cur.execute('SELECT * FROM usuario WHERE email= %s', (form.email.data,))
+        user = cur.fetchone()
+        print(user)
+        if user:
+            for_clave_hash = form.clave.data
+            print(for_clave_hash)
+            
+            # print(f"variable de sesión almacenada {session['id']}, password hashed {password_hash.hexdigest()}")
+            return redirect(url_for('home'))
+    return render_template('login.html', form=form)
+
+
 @app.route('/')
 def home():
     return render_template ('home.html')
@@ -234,9 +287,9 @@ def home():
 def register():
     return render_template ('register.html')
 
-@app.route('/templates/login.html')
-def login():
-    return render_template ('login.html')
+
+
+
 
 @app.route('/templates/sale.html')
 def sale():

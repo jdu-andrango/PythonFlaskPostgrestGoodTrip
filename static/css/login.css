@@ -66,10 +66,28 @@ body{
   background-position: center center;
   
   background-attachment: fixed;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
 .container {
   max-width: 960px;
+}
+
+
+
+.container-lg{
+  background-color: blue;
+  height: 600px;
+  width: 400px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.container-lg h3{
+  display: flex;
+  
 }
 
 /*
@@ -88,6 +106,18 @@ body{
 .form-signin {
   max-width: 330px;
   padding: 15px;
+  background-color: rgb(87, 42, 165);
+}
+.form-signin .form-floating:focus-within {
+  
+}
+
+.form-signin input[type="email"] {
+  
+}
+
+.form-signin input[type="password"] {
+  
 }
 
 
@@ -109,7 +139,6 @@ body{
   color: rgb(22, 16, 16);
   border-bottom-color: rgb(22, 16, 16);
 }
-
 
 
 
