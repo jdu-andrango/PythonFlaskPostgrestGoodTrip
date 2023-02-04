@@ -41,75 +41,69 @@
             <br>
 
         </header>
-<<<<<<< HEAD
+
         <main class="form-signin   ">
-=======
 
 
-<<<<<<< HEAD
+
             <main class="form-signin w-100 m-auto">
-                <form class="formLogin">
-                    <img class="mb-4" src="" alt="" width="72" height="57">
-                    <h1 class="h3 mb-3 fw-normal">LOG IN</h1>
-=======
->>>>>>> 0a083d2406b1119dbcdfe1571cfe8e1b070ae409
 
-        <main class="form-signin  w-100 m-auto ">
->>>>>>> 2dc6f1b95c8c710ebc8089be6435a33edada09db
 
-            <div class="container-lg ">
-                <h3 class=" text-center  fw-normal">REGISTRATE</h3>
+                <main class="form-signin  w-100 m-auto ">
 
-                <form method="POST" action="">
-                    <div class="input-group form-group mb-4">
-                        <div class="input-group-prepend">
-                            {{ form.hidden_tag() }}
-                        </div>
+                    <div class="container-lg ">
+                        <h3 class=" text-center  fw-normal">REGISTRATE</h3>
 
+                        <form method="POST" action="">
+                            <div class="input-group form-group mb-4">
+                                <div class="input-group-prepend">
+                                    {{ form.hidden_tag() }}
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="input-group-prepend">
+
+                            </div>
+
+                            <div class="input-group form-group mb-4">
+                                <div class="input-group-prepend">
+
+                                    <label class="floating mb-3 col-12" for="email">Email</label>
+                                    {{ form.email }}
+                                </div>
+
+                            </div>
+                            <div class="input-group form-group mb-4">
+                                <div class="input-group-prepend">
+                                    <label class="floating mb-3 col-12" for="email">Password</label>
+                                    {{ form.clave }}
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+
+                                <a href="{{ url_for('register')}}"><button type="button" class="btn btn-primary">Crear
+                                        Cuenta</button></a>
+                            </div>
+                            <div class="form-group">
+
+
+                                {{ form.submit }}
+                            </div>
+
+
+
+
+                        </form>
                     </div>
-                    <br>
-                    <div class="input-group-prepend">
-
-                    </div>
-
-                    <div class="input-group form-group mb-4">
-                        <div class="input-group-prepend">
-
-                            <label class="floating mb-3 col-12" for="email">Email</label>
-                            {{ form.email }}
-                        </div>
-
-                    </div>
-                    <div class="input-group form-group mb-4">
-                        <div class="input-group-prepend">
-                            <label class="floating mb-3 col-12" for="email">Password</label>
-                            {{ form.clave }}
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-
-                        <a href="{{ url_for('register')}}"><button type="button" class="btn btn-primary">Crear
-                                Cuenta</button></a>
-                    </div>
-                    <div class="form-group">
-
-
-                        {{ form.submit }}
-                    </div>
 
 
 
-
-                </form>
-            </div>
-
-
-
-        </main>
+                </main>
 
     </div>
 
