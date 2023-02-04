@@ -15,23 +15,26 @@ body{
   background-repeat: no-repeat;
   background-position: center center ;
   background-attachment: fixed;
+  display: flex;
+  
  
 }
 
-.container-lg{
+main{
   
-  padding-top: 100px;
 }
 
 
-.album .row .col .card {
-  background: transparent;
-  color: aqua;
+.container-lg{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
 }
 
-.album .row .col .card .card-body .d-flex .text-muted{
-  color: aqua;
-}
+
+
 
 #small{
   color: aqua;
@@ -59,54 +62,30 @@ body{
  * Dummy devices (replace them with your own or something else entirely!)
  */
 
-body{
-  background: url(/static/img/portadaPalmerasMoradas.jpg);
-  background-repeat: no-repeat;
-  background-size: 100% 100% ;
-  background-position: center center;
-  
-  background-attachment: fixed;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
+
 
 .container {
   max-width: 960px;
-}
-
-
-
-.container-lg{
-  background-color: blue;
-  height: 600px;
-  width: 400px;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
-.container-lg h3{
-  display: flex;
   
 }
+
+
+
 
 /*
  * Custom translucent site header
  */
 
-.cover-container {
-  max-width: 42em;
-  
-}
 
-.cover-container main{
-  padding-top: 4cm;
-}
+
 
 .form-signin {
   max-width: 330px;
   padding: 15px;
   background-color: rgb(87, 42, 165);
+
+  margin: 100px auto;
+ 
 }
 .form-signin .form-floating:focus-within {
   

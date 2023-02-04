@@ -12,6 +12,7 @@ import os
 
 
 
+
 app= Flask(__name__)
 app.static_folder = 'static'
 
@@ -251,12 +252,12 @@ def dashboard():
 
 class LoginForm(FlaskForm):
     email = StringField(validators=[
-            InputRequired(), Length(min=4, max=222)], render_kw={"placeholder": "email"})
+            InputRequired(), Length(min=4, max=222)], render_kw={"placeholder": "Email", "class": "form-control"})
 
     clave = PasswordField(validators=[
-            InputRequired(), Length(min=8, max=222)], render_kw={"placeholder": "clave"})
+            InputRequired(), Length(min=8, max=222)], render_kw={"placeholder": "Password", "class": "form-control"})
 
-    submit = SubmitField('Login')
+    submit = SubmitField('Login', render_kw={"class": "btn btn-primary"})
 
 
 
@@ -275,7 +276,7 @@ def login():
             print(for_clave_hash)
             
             # print(f"variable de sesión almacenada {session['id']}, password hashed {password_hash.hexdigest()}")
-            return redirect(url_for('home'))
+            return redirect(url_for('sale'))
     return render_template('login.html', form=form)
 
 
