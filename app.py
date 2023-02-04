@@ -7,6 +7,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 import hashlib
 import os
+import psycopg2
 
 
 
@@ -272,11 +273,14 @@ def login():
         user = cur.fetchone()
         print(user)
         if user:
+
             for_clave_hash = form.clave.data
             print(for_clave_hash)
             
+            if user['clave'] == for_clave_hash:
+                
             # print(f"variable de sesión almacenada {session['id']}, password hashed {password_hash.hexdigest()}")
-            return redirect(url_for('sale'))
+                return redirect(url_for('sale'))
     return render_template('login.html', form=form)
 
 
@@ -288,9 +292,35 @@ def home():
 def register():
     return render_template ('register.html')
 
+@app.route('/templates/products.html')
+def products():
+    conexion= getConexion()
+    curSor= conexion.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    
+    curSor.execute('SELECT * FROM product')
+    rows=curSor.fetchall()
+    
+    
+    return render_template ('products.html',products=rows)
 
-
-
+@app.route('/add',methods=['POST'])
+def add__product_to_cart():
+    conexion=getConexion()
+    _quantity= int (request.form['quantity'])
+    _code=request.form['code']
+    #---------------------------------------------------------------------------------------------------
+    #                                          validar los valores rscividos 
+    #---------------------------------------------------------------------------------------------------
+    if _quantity and _code and request.method=="POST":
+        cursor= conexion.cursor(cursor_factory=extras.RealDictCursor)
+        return redirect(url_for(products))
+    else:
+        return 'Error while adding item to cart'
+    
+    
+    
+    
+    
 
 @app.route('/templates/sale.html')
 def sale():
@@ -311,6 +341,38 @@ def galery():
 @app.route('/templates/prueba.html')
 def prueba():
     return render_template ('prueba.html')
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
