@@ -25,6 +25,7 @@ main{
 }
 
 
+<<<<<<< HEAD
 .container-lg{
   display: flex;
   flex-direction: column;
@@ -35,9 +36,19 @@ main{
 
 
 
+=======
+.album .row .col .card {
+  background: transparent;
+  color: white;
+}
+
+.album .row .col .card .card-body .d-flex .text-muted{
+  color: white;
+}
+>>>>>>> 2dc6f1b95c8c710ebc8089be6435a33edada09db
 
 #small{
-  color: aqua;
+  color: white;
 }
 .nav-masthead .nav-link {
   color: rgb(22, 16, 16);

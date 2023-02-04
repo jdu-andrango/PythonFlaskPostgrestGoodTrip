@@ -1,10 +1,10 @@
 
 /*
 body{
-  background: black;
+  background: white;
   background-repeat: no-repeat;
   background-size: 100% 100% ;
-  color: aqua;
+  color: withe;
 }
 */
 
@@ -26,24 +26,25 @@ body{
 
 .album .row .col .card {
   background: transparent;
-  color: aqua;
+  color: white;
+
 }
 
 .album .row .col .card .card-body .d-flex .text-muted{
-  color: aqua;
+  color: white;
 }
 
 #small{
-  color: aqua;
+  color: white;
 }
 .nav-masthead .nav-link {
-  color: rgb(22, 16, 16);
+  color: rgb(240, 235, 235);
   border-bottom: .25rem solid transparent;
 }
 
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
-  border-bottom-color: rgba(255, 255, 255, .25);
+  border-bottom-color: rgb(243, 234, 234);
 }
 
 .nav-masthead .nav-link + .nav-link {
@@ -51,8 +52,8 @@ body{
 }
 
 .nav-masthead .active {
-  color: rgb(22, 16, 16);
-  border-bottom-color: rgb(22, 16, 16);
+  color: rgb(246, 240, 240);
+  border-bottom-color: rgb(252, 250, 250);
 }
 
 /*
@@ -87,24 +88,24 @@ body{
 
 .album .row .col .card {
   background: transparent;
-  color: aqua;
+  color: white;
 }
 
 .album .row .col .card .card-body .d-flex .text-muted{
-  color: aqua;
+  color: white;
 }
 
 #small{
-  color: aqua;
+  color: white;
 }
 .nav-masthead .nav-link {
-  color: rgb(22, 16, 16);
+  color: rgb(246, 242, 242);
   border-bottom: .25rem solid transparent;
 }
 
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
-  border-bottom-color: rgba(255, 255, 255, .25);
+  border-bottom-color: rgb(255, 255, 255);
 }
 
 .nav-masthead .nav-link + .nav-link {
@@ -112,8 +113,8 @@ body{
 }
 
 .nav-masthead .active {
-  color: rgb(22, 16, 16);
-  border-bottom-color: rgb(22, 16, 16);
+  color: rgb(249, 237, 237);
+  border-bottom-color: rgb(240, 237, 237);
 }
 
 /*
@@ -150,13 +151,13 @@ body{
 
 
 .nav-masthead .nav-link {
-  color: rgb(22, 16, 16);
+  color: rgb(242, 233, 233);
   border-bottom: .25rem solid transparent;
 }
 
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
-  border-bottom-color: rgba(255, 255, 255, .25);
+  border-bottom-color: rgb(255, 255, 255);
 }
 
 .nav-masthead .nav-link + .nav-link {
@@ -164,8 +165,8 @@ body{
 }
 
 .nav-masthead .active {
-  color: rgb(22, 16, 16);
-  border-bottom-color: rgb(22, 16, 16);
+  color: rgb(251, 242, 242);
+  border-bottom-color: rgb(241, 240, 240);
 }
 
 /*
@@ -190,7 +191,7 @@ body{
   bottom: 10%;
   left: 10px;
   content: "";
-  background-color: rgba(255, 255, 255, .1);
+  background-color: rgb(255, 255, 255);
   border-radius: 5px;
 }
 
