@@ -22,15 +22,15 @@ body{
 
 .album .row .col .card {
   background: transparent;
-  color: aqua;
+  color: white;
 }
 
 .album .row .col .card .card-body .d-flex .text-muted{
-  color: aqua;
+  color: white;
 }
 
 #small{
-  color: aqua;
+  color: white;
 }
 .nav-masthead .nav-link {
   color: rgb(22, 16, 16);
