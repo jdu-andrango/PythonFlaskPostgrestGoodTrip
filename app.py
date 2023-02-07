@@ -11,7 +11,18 @@ import psycopg2
 
 
 
+"""
+ ___  ________   ___  ________  ___  ________          ________  _______           ___       ________  ________           ________  ________  ________   _______      ___    ___ ___  ________  ________   _______   ________
+|\  \|\   ___  \|\  \|\   ____\|\  \|\   __  \        |\   ___ \|\  ___ \         |\  \     |\   __  \|\   ____\         |\   ____\|\   __  \|\   ___  \|\  ___ \    |\  \  /  /|\  \|\   __  \|\   ___  \|\  ___ \ |\   ____\
+\ \  \ \  \\ \  \ \  \ \  \___|\ \  \ \  \|\  \       \ \  \_|\ \ \   __/|        \ \  \    \ \  \|\  \ \  \___|_        \ \  \___|\ \  \|\  \ \  \\ \  \ \   __/|   \ \  \/  / | \  \ \  \|\  \ \  \\ \  \ \   __/|\ \  \___|_
+ \ \  \ \  \\ \  \ \  \ \  \    \ \  \ \  \\\  \       \ \  \ \\ \ \  \_|/__       \ \  \    \ \   __  \ \_____  \        \ \  \    \ \  \\\  \ \  \\ \  \ \  \_|/__  \ \    / / \ \  \ \  \\\  \ \  \\ \  \ \  \_|/_\ \_____  \
+  \ \  \ \  \\ \  \ \  \ \  \____\ \  \ \  \\\  \       \ \  \_\\ \ \  \_|\ \       \ \  \____\ \  \ \  \|____|\  \        \ \  \____\ \  \\\  \ \  \\ \  \ \  \_|\ \  /     \/   \ \  \ \  \\\  \ \  \\ \  \ \  \_|\ \|____|\  \
+   \ \__\ \__\\ \__\ \__\ \_______\ \__\ \_______\       \ \_______\ \_______\       \ \_______\ \__\ \__\____\_\  \        \ \_______\ \_______\ \__\\ \__\ \_______\/  /\   \    \ \__\ \_______\ \__\\ \__\ \_______\____\_\  \
+    \|__|\|__| \|__|\|__|\|_______|\|__|\|_______|        \|_______|\|_______|        \|_______|\|__|\|__|\_________\        \|_______|\|_______|\|__| \|__|\|_______/__/ /\ __\    \|__|\|_______|\|__| \|__|\|_______|\_________\
+                                                                                                         \|_________|                                                |__|/ \|__|                                       \|_________|
 
+
+"""
 
 
 app= Flask(__name__)
@@ -28,11 +39,22 @@ user = 'postgres'
 password = 'david'
 
 
+
+
+#---------------------------------------------------------------------------
+# !                           esta funcion esta dise;ada para conectar la base de datos postgres con Python
+#---------------------------------------------------------------------------
+
 def getConexion():
     conexion = connect(host=host, port=port, database=database,
                        user=user, password=password)
     return conexion
 
+
+
+#--------------------------------------------------------------------------------------------------------------------------
+# *                                                     breakingpoin 
+#--------------------------------------------------------------------------------------------------------------------------
 
 @app.get('/goodtrip/comentario')
 def comentary():
@@ -273,13 +295,9 @@ def login():
         user = cur.fetchone()
         print(user)
         if user:
-
             for_clave_hash = form.clave.data
             print(for_clave_hash)
-            
             if user['clave'] == for_clave_hash:
-                
-            # print(f"variable de sesión almacenada {session['id']}, password hashed {password_hash.hexdigest()}")
                 return redirect(url_for('products'))
     return render_template('login.html', form=form)
 
@@ -311,7 +329,7 @@ def add__product_to_cart():
     print(_quantity)
     print(_code)
     #---------------------------------------------------------------------------------------------------
-    #                                          validar los valores rscividos 
+    #                                          validar los valores recibidos 
     #---------------------------------------------------------------------------------------------------
     if _quantity and _code and request.method=='POST':
         cursor= conexion.cursor(cursor_factory=extras.RealDictCursor)
@@ -322,7 +340,7 @@ def add__product_to_cart():
         itemArray = {row['code']:{'name':row['name'],'code':row['code'],'quantity':_quantity,'price':row['price'], 'image':row['image'],'total_price':_quantity * row['price']}}
        
         all_total_price= 0
-        all_total_quantity= 0 \
+        all_total_quantity= 0 
         
         session.modified=True
         
@@ -430,34 +448,469 @@ def galery():
 def prueba():
     return render_template ('prueba.html')
 
+@app.route('/templates/tonsupa.html')
+def tonsupa():
+    return render_template ('tonsupa.html')
+
+
+@app.route('/templates/cotopaxi.html')
+def cotopaxi():
+    return render_template ('cotopaxi.html')
 
 
 
 
+@app.route('/templates/banios.html')
+def banios():
+    return render_template ('banios.html')
 
+
+
+
+#------------------------------------------------
+# todo           comentario atacames
+#------------------------------------------------ 
+
+@app.get('/goodtrip/comentarioAtacames')
+def comentaryAtacames():
+
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+    curSor.execute('SELECT * FROM comentarios_atacames')
+    comentarios = curSor.fetchall()
+    curSor.close()
+    conexion.close()
+
+    return jsonify(comentarios)
+
+
+@app.post('/goodtrip/comentarioAtacames')
+def crearComentarioAtacames():
+
+    nuevoComentario = request.get_json()
+
+    nombre = nuevoComentario['nombre']
+    apellido = nuevoComentario['apellido']
+    sexo = nuevoComentario['sexo']
+    nacionalidad = nuevoComentario['nacionalidad']
+    observacion = nuevoComentario['observacion']
+    conclucion = nuevoComentario['conclucion']
+
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+    curSor.execute('INSERT INTO comentarios_atacames (nombre, apellido, sexo, nacionalidad,observacion,conclucion) VALUES (%s, %s, %s, %s, %s, %s) RETURNING * ',
+                   (nombre, apellido, sexo, nacionalidad, observacion, conclucion))
+    newComentario = curSor.fetchone()
+    conexion.commit()
+    curSor.close()
+    conexion.close()
+    return jsonify(newComentario)
+    
+
+@app.get('/goodtrip/comentarioAtacames/<id>')
+def taraerUsuarioAtacames(id):
     
     
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+    
+    curSor.execute('SELECT * FROM comentarios_atacames WHERE id = %s ', (id, ))
+    traerUsuario=curSor.fetchone()
+    
+    
+    if traerUsuario is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+    print (traerUsuario)
+    return jsonify(traerUsuario)
+    
+
+@app.delete('/goodtrip/comentarioAtacames/<id>')
+def deleteComentarioAtacames(id):
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+   
+    curSor.execute('DELETE FROM comentarios_atacames WHERE id = %s RETURNING *', (id, ))
+    comentarioEliminado=curSor.fetchone()
+    conexion.commit()
+    
+    curSor.close()
+    conexion.close()
+    
+    if comentarioEliminado is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+    return jsonify(comentarioEliminado)
+
+
+@app.put('/goodtrip/comentarioAtacames/<id>')
+def updateUsuarioAtacames(id):
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+
+    newUser= request.get_json()
+   
+    nombre = newUser['nombre']
+    apellido = newUser['apellido']
+    sexo = newUser['sexo']
+    nacionalidad = newUser['nacionalidad']
+    observacion = newUser['observacion']
+    conclucion = newUser['conclucion']
+    
+    curSor.execute('UPDATE comentarios_atacames SET nombre= %s, apellido= %s, sexo= %s, nacionalidad= %s,observacion= %s,conclucion= %s RETURNING *',(nombre, apellido, sexo, nacionalidad,observacion,conclucion))
+    usuarioActualizado=curSor.fetchone()
+    
+    conexion.commit()
+    
+    curSor.close()
+    conexion.close()
+    
+    if usuarioActualizado is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+
+    return jsonify(usuarioActualizado)
+
+
+
+#---------------------------------------------------------------------------------------------------
+#                                          comentario tonsupa
+#---------------------------------------------------------------------------------------------------
 
 
 
 
 
+@app.get('/goodtrip/comentarioTonsupa')   #! Esta es la ruta de la peticion get a la base de datos  
+def comentaryTonsupa():
+
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor) #! esto es un modulo de flask que me ayuda a transformar los datos que traigo de la base de datos a diccionario 
+
+    curSor.execute('SELECT * FROM comentarios_tonsupa')
+    comentarios = curSor.fetchall()
+    curSor.close()
+    conexion.close()
+
+    return jsonify(comentarios)
+
+
+@app.post('/goodtrip/comentarioTonsupa')
+def crearComentarioTonsupa():
+
+    nuevoComentario = request.get_json()
+
+    nombre = nuevoComentario['nombre']
+    apellido = nuevoComentario['apellido']
+    sexo = nuevoComentario['sexo']
+    nacionalidad = nuevoComentario['nacionalidad']
+    observacion = nuevoComentario['observacion']
+    conclucion = nuevoComentario['conclucion']
+
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+    curSor.execute('INSERT INTO comentarios_tonsupa (nombre, apellido, sexo, nacionalidad,observacion,conclucion) VALUES (%s, %s, %s, %s, %s, %s) RETURNING * ',
+                   (nombre, apellido, sexo, nacionalidad, observacion, conclucion))
+    newComentario = curSor.fetchone()
+    conexion.commit()
+    curSor.close()
+    conexion.close()
+    return jsonify(newComentario)
+    
+
+@app.get('/goodtrip/comentarioTonsupa/<id>')
+def taraerUsuarioTonsupa(id):
+    
+    
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+    
+    curSor.execute('SELECT * FROM comentarios_tonsupa WHERE id = %s ', (id, ))
+    traerUsuario=curSor.fetchone()
+    
+    
+    if traerUsuario is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+    print (traerUsuario)
+    return jsonify(traerUsuario)
+    
+
+@app.delete('/goodtrip/comentarioTonsupa/<id>')
+def deleteComentarioTonsupa(id):
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+   
+    curSor.execute('DELETE FROM comentarios_tonsupa WHERE id = %s RETURNING *', (id, ))
+    comentarioEliminado=curSor.fetchone()
+    conexion.commit()
+    
+    curSor.close()
+    conexion.close()
+    
+    if comentarioEliminado is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+    return jsonify(comentarioEliminado)
+
+
+@app.put('/goodtrip/comentarioTonsupa/<id>')
+def updateUsuarioTonsupa(id):
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+
+    newUser= request.get_json()
+   
+    nombre = newUser['nombre']
+    apellido = newUser['apellido']
+    sexo = newUser['sexo']
+    nacionalidad = newUser['nacionalidad']
+    observacion = newUser['observacion']
+    conclucion = newUser['conclucion']
+    
+    curSor.execute('UPDATE comentarios_tonsupa SET nombre= %s, apellido= %s, sexo= %s, nacionalidad= %s,observacion= %s,conclucion= %s RETURNING *',(nombre, apellido, sexo, nacionalidad,observacion,conclucion))
+    usuarioActualizado=curSor.fetchone()
+    
+    conexion.commit()
+    
+    curSor.close()
+    conexion.close()
+    
+    if usuarioActualizado is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+
+    return jsonify(usuarioActualizado)
 
 
 
 
 
+#---------------------------------------------------------------------------------------------------
+# !                                        comentario cotopaxi
+#---------------------------------------------------------------------------------------------------
+
+
+
+@app.get('/goodtrip/comentarioCotopaxi')   #! Esta es la ruta de la peticion get a la base de datos  
+def comentaryCotopaxi():
+
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor) #! esto es un modulo de flask que me ayuda a transformar los datos que traigo de la base de datos a diccionario 
+    curSor.execute('SELECT * FROM comentarios_cotopaxi')
+    comentarios = curSor.fetchall()
+    curSor.close()
+    conexion.close()
+    return jsonify(comentarios)
+
+
+@app.post('/goodtrip/comentarioCotopaxi')
+def crearComentarioCotopaxi():
+
+    nuevoComentario = request.get_json()
+
+    nombre = nuevoComentario['nombre']
+    apellido = nuevoComentario['apellido']
+    sexo = nuevoComentario['sexo']
+    nacionalidad = nuevoComentario['nacionalidad']
+    observacion = nuevoComentario['observacion']
+    conclucion = nuevoComentario['conclucion']
+
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+    curSor.execute('INSERT INTO comentarios_cotopaxi (nombre, apellido, sexo, nacionalidad,observacion,conclucion) VALUES (%s, %s, %s, %s, %s, %s) RETURNING * ',
+                   (nombre, apellido, sexo, nacionalidad, observacion, conclucion))
+    newComentario = curSor.fetchone()
+    conexion.commit()
+    curSor.close()
+    conexion.close()
+    return jsonify(newComentario)
+    
+
+@app.get('/goodtrip/comentarioCotopaxi/<id>')
+def taraerUsuarioCotopaxi(id):
+    
+    
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+    
+    curSor.execute('SELECT * FROM comentarios_cotopaxi WHERE id = %s ', (id, ))
+    traerUsuario=curSor.fetchone()
+    
+    
+    if traerUsuario is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+    print (traerUsuario)
+    return jsonify(traerUsuario)
+    
+
+@app.delete('/goodtrip/comentarioCotopaxi/<id>')
+def deleteComentarioCotopaxi(id):
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+   
+    curSor.execute('DELETE FROM comentarios_cotopaxi WHERE id = %s RETURNING *', (id, ))
+    comentarioEliminado=curSor.fetchone()
+    conexion.commit()
+    
+    curSor.close()
+    conexion.close()
+    
+    if comentarioEliminado is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+    return jsonify(comentarioEliminado)
+
+
+@app.put('/goodtrip/comentarioCotopaxi/<id>')
+def updateUsuarioCotopaxi(id):
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+
+    newUser= request.get_json()
+   
+    nombre = newUser['nombre']
+    apellido = newUser['apellido']
+    sexo = newUser['sexo']
+    nacionalidad = newUser['nacionalidad']
+    observacion = newUser['observacion']
+    conclucion = newUser['conclucion']
+    
+    curSor.execute('UPDATE comentarios_cotopaxi SET nombre= %s, apellido= %s, sexo= %s, nacionalidad= %s,observacion= %s,conclucion= %s RETURNING *',(nombre, apellido, sexo, nacionalidad,observacion,conclucion))
+    usuarioActualizado=curSor.fetchone()
+    
+    conexion.commit()
+    
+    curSor.close()
+    conexion.close()
+    
+    if usuarioActualizado is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+
+    return jsonify(usuarioActualizado)
 
 
 
 
+#---------------------------------------------------------------------------------------------------
+# !                                        comentario banios
+#---------------------------------------------------------------------------------------------------
 
 
 
+@app.get('/goodtrip/comentarioBanios')   #! Esta es la ruta de la peticion get a la base de datos  
+def comentaryBanios():
+
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor) #! esto es un modulo de flask que me ayuda a transformar los datos que traigo de la base de datos a diccionario 
+    curSor.execute('SELECT * FROM comentarios_banios')
+    comentarios = curSor.fetchall()
+    curSor.close()
+    conexion.close()
+    return jsonify(comentarios)
 
 
+@app.post('/goodtrip/comentarioBanios')
+def crearComentarioBanios():
+
+    nuevoComentario = request.get_json()
+
+    nombre = nuevoComentario['nombre']
+    apellido = nuevoComentario['apellido']
+    sexo = nuevoComentario['sexo']
+    nacionalidad = nuevoComentario['nacionalidad']
+    observacion = nuevoComentario['observacion']
+    conclucion = nuevoComentario['conclucion']
+
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+    curSor.execute('INSERT INTO comentarios_banios (nombre, apellido, sexo, nacionalidad,observacion,conclucion) VALUES (%s, %s, %s, %s, %s, %s) RETURNING * ',
+                   (nombre, apellido, sexo, nacionalidad, observacion, conclucion))
+    newComentario = curSor.fetchone()
+    conexion.commit()
+    curSor.close()
+    conexion.close()
+    return jsonify(newComentario)
+    
+
+@app.get('/goodtrip/comentarioBanios/<id>')
+def taraerUsuarioBanios(id):
+    
+    
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+    
+    curSor.execute('SELECT * FROM comentarios_banios WHERE id = %s ', (id, ))
+    traerUsuario=curSor.fetchone()
+    
+    
+    if traerUsuario is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+    print (traerUsuario)
+    return jsonify(traerUsuario)
+    
+
+@app.delete('/goodtrip/comentarioBanios/<id>')
+def deleteComentarioBanios(id):
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+   
+    curSor.execute('DELETE FROM comentarios_banios WHERE id = %s RETURNING *', (id, ))
+    comentarioEliminado=curSor.fetchone()
+    conexion.commit()
+    
+    curSor.close()
+    conexion.close()
+    
+    if comentarioEliminado is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+    return jsonify(comentarioEliminado)
 
 
+@app.put('/goodtrip/comentarioBanios/<id>')
+def updateUsuarioBanios(id):
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+
+    newUser= request.get_json()
+   
+    nombre = newUser['nombre']
+    apellido = newUser['apellido']
+    sexo = newUser['sexo']
+    nacionalidad = newUser['nacionalidad']
+    observacion = newUser['observacion']
+    conclucion = newUser['conclucion']
+    
+    curSor.execute('UPDATE comentarios_banios SET nombre= %s, apellido= %s, sexo= %s, nacionalidad= %s,observacion= %s,conclucion= %s RETURNING *',(nombre, apellido, sexo, nacionalidad,observacion,conclucion))
+    usuarioActualizado=curSor.fetchone()
+    
+    conexion.commit()
+    
+    curSor.close()
+    conexion.close()
+    
+    if usuarioActualizado is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+
+    return jsonify(usuarioActualizado)
 
 
 

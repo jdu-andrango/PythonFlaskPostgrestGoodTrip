@@ -147,3 +147,222 @@
                 font-family: 'Open Sans', sans-serif;
             }
           
+
+/*
+body{
+  background: white;
+  background-repeat: no-repeat;
+  background-size: 100% 100% ;
+  color: withe;
+}
+*/
+
+body{
+  margin: 0;
+  background-image: url(/static/img/portadaPalmerasMoradas.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center ;
+  background-attachment: fixed;
+ 
+}
+
+
+.img-fluid{
+  height: auto;
+  max-width: 100%;
+}
+
+.album .row .col .card {
+  background: transparent;
+  color: white;
+
+}
+
+.album .row .col .card .card-body .d-flex .text-muted{
+  color: white;
+}
+
+#small{
+  color: white;
+}
+.nav-masthead .nav-link {
+  color: rgb(240, 235, 235);
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgb(243, 234, 234);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: rgb(246, 240, 240);
+  border-bottom-color: rgb(252, 250, 250);
+}
+
+/*
+ * Dummy devices (replace them with your own or something else entirely!)
+ */
+
+
+/*
+body{
+  background: black;
+  background-repeat: no-repeat;
+  background-size: 100% 100% ;
+  color: aqua;
+}
+*/
+
+body{
+  margin: 0;
+  background-image: url(/static/img/portadaPalmerasMoradas.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center ;
+  background-attachment: fixed;
+ 
+}
+
+
+.img-fluid{
+  height: auto;
+  max-width: 100%;
+}
+
+.album .row .col .card {
+  background: transparent;
+  color: white;
+}
+
+.album .row .col .card .card-body .d-flex .text-muted{
+  color: white;
+}
+
+#small{
+  color: white;
+}
+.nav-masthead .nav-link {
+  color: rgb(246, 242, 242);
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgb(255, 255, 255);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: rgb(249, 237, 237);
+  border-bottom-color: rgb(240, 237, 237);
+}
+
+/*
+ * Dummy devices (replace them with your own or something else entirely!)
+ */
+
+body{
+  background: url(/static/img/portadaPalmerasMoradas.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100% ;
+  background-position: center center;
+  
+  background-attachment: fixed;
+}
+
+.container {
+  max-width: 960px;
+}
+
+/*
+ * Custom translucent site header
+ */
+
+.cover-container {
+  max-width: 42em;
+  
+}
+
+.cover-container main{
+  padding-top: 4cm;
+}
+
+
+
+
+.nav-masthead .nav-link {
+  color: rgb(242, 233, 233);
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgb(255, 255, 255);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: rgb(251, 242, 242);
+  border-bottom-color: rgb(241, 240, 240);
+}
+
+/*
+ * Dummy devices (replace them with your own or something else entirely!)
+ */
+
+.product-device {
+  position: absolute;
+  right: 10%;
+  bottom: -30%;
+  width: 300px;
+  height: 540px;
+  background-color: #333;
+  border-radius: 21px;
+  transform: rotate(30deg);
+}
+
+.product-device::before {
+  position: absolute;
+  top: 10%;
+  right: 10px;
+  bottom: 10%;
+  left: 10px;
+  content: "";
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+}
+
+.product-device-2 {
+  top: -25%;
+  right: auto;
+  bottom: 0;
+  left: 5%;
+  background-color: #e5e5e5;
+}
+
+
+/*
+ * Extra utilities
+ */
+
+.flex-equal > * {
+  flex: 1;
+}
+@media (min-width: 768px) {
+  .flex-md-equal > * {
+    flex: 1;
+  }
+}
+
