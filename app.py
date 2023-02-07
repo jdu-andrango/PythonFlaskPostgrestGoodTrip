@@ -459,12 +459,18 @@ def cotopaxi():
 
 
 
+@app.route('/templates/homeAdmin.html')
+def homeAdmin():
+    return render_template ('homeAdmin.html')
 
 @app.route('/templates/banios.html')
 def banios():
     return render_template ('banios.html')
 
 
+@app.route('/templates/quilotoa.html')
+def quilotoa():
+    return render_template ('quilotoa.html')
 
 
 #------------------------------------------------
@@ -914,6 +920,115 @@ def updateUsuarioBanios(id):
 
 
 
+
+
+#---------------------------------------------------------------------------------------------------
+# !                                        comentario banios
+#---------------------------------------------------------------------------------------------------
+
+
+
+@app.get('/goodtrip/comentarioQuilotoa')   #! Esta es la ruta de la peticion get a la base de datos  
+def comentaryQuilotoa():
+
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor) #! esto es un modulo de flask que me ayuda a transformar los datos que traigo de la base de datos a diccionario 
+    curSor.execute('SELECT * FROM comentarios_quilotoa')
+    comentarios = curSor.fetchall()
+    curSor.close()
+    conexion.close()
+    return jsonify(comentarios)
+
+
+@app.post('/goodtrip/comentarioQuilotoa')
+def crearComentarioQuilotoa():
+
+    nuevoComentario = request.get_json()
+
+    nombre = nuevoComentario['nombre']
+    apellido = nuevoComentario['apellido']
+    sexo = nuevoComentario['sexo']
+    nacionalidad = nuevoComentario['nacionalidad']
+    observacion = nuevoComentario['observacion']
+    conclucion = nuevoComentario['conclucion']
+
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+    curSor.execute('INSERT INTO comentarios_quilotoa (nombre, apellido, sexo, nacionalidad,observacion,conclucion) VALUES (%s, %s, %s, %s, %s, %s) RETURNING * ',
+                   (nombre, apellido, sexo, nacionalidad, observacion, conclucion))
+    newComentario = curSor.fetchone()
+    conexion.commit()
+    curSor.close()
+    conexion.close()
+    return jsonify(newComentario)
+    
+
+@app.get('/goodtrip/comentarioQuilotoa/<id>')
+def taraerUsuarioQuilotoa(id):
+    
+    
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+    
+    curSor.execute('SELECT * FROM comentarios_quilotoa WHERE id = %s ', (id, ))
+    traerUsuario=curSor.fetchone()
+    
+    
+    if traerUsuario is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+    print (traerUsuario)
+    return jsonify(traerUsuario)
+    
+
+@app.delete('/goodtrip/comentarioQuilotoa/<id>')
+def deleteComentarioQuilotoa(id):
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+   
+    curSor.execute('DELETE FROM comentarios_quilotoa WHERE id = %s RETURNING *', (id, ))
+    comentarioEliminado=curSor.fetchone()
+    conexion.commit()
+    
+    curSor.close()
+    conexion.close()
+    
+    if comentarioEliminado is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+    return jsonify(comentarioEliminado)
+
+
+@app.put('/goodtrip/comentarioQuilotoa/<id>')
+def updateUsuarioQuilotoa(id):
+    conexion = getConexion()
+    curSor = conexion.cursor(cursor_factory=extras.RealDictCursor)
+
+
+    newUser= request.get_json()
+   
+    nombre = newUser['nombre']
+    apellido = newUser['apellido']
+    sexo = newUser['sexo']
+    nacionalidad = newUser['nacionalidad']
+    observacion = newUser['observacion']
+    conclucion = newUser['conclucion']
+    
+    curSor.execute('UPDATE comentarios_quilotoa SET nombre= %s, apellido= %s, sexo= %s, nacionalidad= %s,observacion= %s,conclucion= %s RETURNING *',(nombre, apellido, sexo, nacionalidad,observacion,conclucion))
+    usuarioActualizado=curSor.fetchone()
+    
+    conexion.commit()
+    
+    curSor.close()
+    conexion.close()
+    
+    if usuarioActualizado is None:
+        return jsonify({'message':'usyuario no encontrado'}),404
+    
+
+    return jsonify(usuarioActualizado)
 
 
 

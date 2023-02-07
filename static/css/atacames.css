@@ -8,15 +8,6 @@ body{
 }
 */
 
-body{
-  margin: 0;
-  background-image: url(/static/img/portadaPalmerasMoradas.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center ;
-  background-attachment: fixed;
- 
-}
 
 
 
@@ -47,8 +38,8 @@ body{
 }
 
 .nav-masthead .active {
-  color: rgb(22, 16, 16);
-  border-bottom-color: rgb(22, 16, 16);
+  color: white;
+  border-bottom-color: white;
 }
 
 /*
@@ -62,6 +53,7 @@ body{
   background-position: center center;
   
   background-attachment: fixed;
+  color: white;
 }
 
 .container {
@@ -90,7 +82,7 @@ body{
 
 
 .nav-masthead .nav-link {
-  color: rgb(22, 16, 16);
+  color: white;
   border-bottom: .25rem solid transparent;
 }
 
@@ -104,8 +96,8 @@ body{
 }
 
 .nav-masthead .active {
-  color: rgb(22, 16, 16);
-  border-bottom-color: rgb(22, 16, 16);
+  color: white;
+  border-bottom-color: white;
 }
 
 

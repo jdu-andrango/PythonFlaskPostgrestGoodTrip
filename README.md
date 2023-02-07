@@ -47,3 +47,14 @@ conclucion VARCHAR(255) NOT NULL
 )
 
 
+
+CREATE TABLE IF NOT EXISTS comentarios_quilotoa(
+id SERIAL PRIMARY KEY NOT NULL,
+nombre VARCHAR(255) NOT NULL,
+apellido VARCHAR(255) NOT NULL,
+sexo VARCHAR(255) NOT NULL,
+nacionalidad VARCHAR(255) NOT NULL,
+observacion VARCHAR(255) NOT NULL,
+conclucion VARCHAR(255) NOT NULL
+)
+
